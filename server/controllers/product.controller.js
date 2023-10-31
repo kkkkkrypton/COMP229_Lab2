@@ -98,11 +98,16 @@ const removeAll = async (req, res) => {
 
 // Function to find products by name containing a keyword
 const searchByName = async (req, res) => {
-	const keyword = req.params.key;
 	try {
-		const productList = await products.find({ name: { $regex: keyword, $options: 'i' } })
-			.select('name description price quantity category');
-		res.send(productList);
+		const keyword = req.query.name;
+		//debug logging
+		//console.log('Received keyword:', keyword);
+
+		const productList = await products.find({ name: { $regex: keyword, $options: 'i' } });
+		//debug logging
+		//console.log('Found products:', productList);
+
+		res.json(productList);
 	}
 	catch (err) {
 		return res.status(400).json({

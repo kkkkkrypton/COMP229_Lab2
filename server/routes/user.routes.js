@@ -11,12 +11,15 @@ router.route('/api/products')
 	.get(productCtrl.list) //list all products
 	.post(productCtrl.create) //create a new product
 	.delete(productCtrl.removeAll) //delete all products
-	.get(productCtrl.searchByName);  //find products by name containing a keyword
+
 
 router.route('/api/products/:productId')
 	.get(productCtrl.read) //return a specific product by ID
 	.put(productCtrl.update) //update a specific product by ID
 	.delete(productCtrl.remove) //delete a specific product by ID
+
+router.route('/api/search')
+	.get(productCtrl.searchByName);  //find products by name containing a keyword
 
 
 router.param('productId', productCtrl.productByID)
